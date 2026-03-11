@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>All Things Mama Jo</title>
+
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+
+<style>
+
+body{
+font-family: 'Segoe UI', sans-serif;
+margin:0;
+background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4);
+}
+
+header{
+text-align:center;
+padding:40px;
+color:white;
+background:rgba(0,0,0,0.3);
+}
+
+header h1{
+font-size:48px;
+margin:0;
+}
+
+nav{
+background:white;
+padding:15px;
+text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+nav a{
+margin:0 15px;
+font-weight:bold;
+text-decoration:none;
+color:#444;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:25px;
+margin-bottom:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.activities{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+
+.activity{
+text-align:center;
+}
+
+.activity img{
+width:100%;
+border-radius:10px;
+height:140px;
+object-fit:cover;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button{
+background:#ff6b81;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff4757;
+}
+
+.review{
+border-bottom:1px solid #eee;
+padding:10px 0;
+}
+
+#calendar{
+max-width:900px;
+margin:auto;
+}
+
+footer{
+text-align:center;
+color:white;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>All Things Mama Jo</h1>
+<p>Fun bookings, great memories, amazing reviews ⭐</p>
+</header>
+
+<nav>
+<a href="#activities">Activities</a>
+<a href="#calendar">Calendar Booking</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Emergency Contact</a>
+</nav>
+
+<div class="container">
+
+<!-- ACTIVITIES -->
+
+<div class="card" id="activities">
+
+<h2>Available Activities</h2>
+
+<div class="activities">
+
+<div class="activity">
+<img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e">
+<p>Tennis Match 🎾</p>
+</div>
+
+<div class="activity">
+<img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba">
+<p>Movie Night 🎬</p>
+</div>
+
+<div class="activity">
+<img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0">
+<p>Dinner & Drinks 🍽️</p>
+</div>
+
+<div class="activity">
+<img src="https://images.unsplash.com/photo-1560090995-01632a28895b">
+<p>Pool Day 🏊</p>
+</div>
+
+<div class="activity">
+<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+<p>Outdoor Activity 🌳</p>
+</div>
+
+<div class="activity">
+<img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2">
+<p>Concert 🎵</p>
+</div>
+
+<div class="activity">
+<img src="https://images.unsplash.com/photo-1513258496099-48168024aec0">
+<p>Study Time 📚</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BOOKING -->
+
+<div class="card">
+
+<h2>Book an Activity</h2>
+
+<form id="bookingForm">
+
+<label>Full Name</label>
+<input id="name" required>
+
+<label>Email</label>
+<input type="email" id="email" required>
+
+<label>Phone</label>
+<input id="phone" required>
+
+<label>Select Activity</label>
+
+<select id="activity">
+<option>Tennis Match 🎾</option>
+<option>Movie Night 🎬</option>
+<option>Dinner & Drinks 🍽️</option>
+<option>Pool Day 🏊</option>
+<option>Outdoor Activity 🌳</option>
+<option>Concert 🎵</option>
+<option>Study Time 📚</option>
+</select>
+
+<label>Select Date</label>
+<input type="date" id="date" required>
+
+<label>Select Time</label>
+<input type="time" id="time" required>
+
+<button type="submit">Add Booking to Calendar</button>
+
+</form>
+
+</div>
+
+<!-- CALENDAR -->
+
+<div class="card">
+
+<h2>Booking Calendar</h2>
+
+<div id='calendar'></div>
+
+</div>
+
+
+<!-- REVIEWS -->
+
+<div class="card" id="reviews">
+
+<h2>Reviews ⭐</h2>
+
+<input id="reviewName" placeholder="Your name">
+
+<textarea id="reviewText" placeholder="Write your review"></textarea>
+
+<select id="rating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+
+<button onclick="addReview()">Submit Review</button>
+
+<div id="reviewList"></div>
+
+</div>
+
+<!-- CONTACT -->
+
+<div class="card" id="contact">
+
+<h2>Emergency Contact ☎</h2>
+
+<input id="emergencyNumber" placeholder="Enter emergency phone number">
+
+<button onclick="saveNumber()">Save Contact</button>
+
+<p id="savedNumber"></p>
+
+</div>
+
+</div>
+
+<footer>
+<p>© All Things Mama Jo</p>
+</footer>
+
+<script>
+
+let calendar;
+
+document.addEventListener('DOMContentLoaded', function() {
+
+let calendarEl = document.getElementById('calendar');
+
+calendar = new FullCalendar.Calendar(calendarEl, {
+initialView: 'dayGridMonth'
+});
+
+calendar.render();
+
+});
+
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let name = document.getElementById("name").value;
+let activity = document.getElementById("activity").value;
+let date = document.getElementById("date").value;
+let time = document.getElementById("time").value;
+
+calendar.addEvent({
+title: activity + " - " + name,
+start: date + "T" + time
+});
+
+});
+
+function addReview(){
+
+let name = document.getElementById("reviewName").value;
+let text = document.getElementById("reviewText").value;
+let rating = document.getElementById("rating").value;
+
+let review = `<div class="review"><strong>${name}</strong> ${"⭐".repeat(rating)}<p>${text}</p></div>`;
+
+document.getElementById("reviewList").innerHTML += review;
+
+}
+
+function saveNumber(){
+
+let number = document.getElementById("emergencyNumber").value;
+
+document.getElementById("savedNumber").innerText =
+"Emergency Contact: " + number;
+
+}
+
+</script>
+
+</body>
+</html>
